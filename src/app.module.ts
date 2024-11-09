@@ -9,9 +9,16 @@ import { JwtAuthGuard } from './v1/auth/jwt/guards/jwt-auth.guard';
 import { JwtStrategy } from './v1/auth/jwt/strategy/jwt.strategy';
 import { AuthModule } from './v1/auth/auth.module';
 import { ConfigModule } from './v1/config/config.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
-  imports: [V1Module, DatabaseModule, AuthModule, ConfigModule],
+  imports: [
+    ScheduleModule.forRoot(),
+    V1Module,
+    DatabaseModule,
+    AuthModule,
+    ConfigModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
