@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TransactionsController } from './transactions.controller';
 import { TransactionsService } from './transactions.service';
-import { LoanBalancerModule } from '../loan-balancer/loan-balancer.module';
+import { LoadBalancerModule } from '../load-balancer/load-balancer.module';
 import { HttpModule } from '@nestjs/axios';
 import { TransactionRepository } from './repository/transaction.repository';
 
 @Module({
-  imports: [HttpModule.register({}), LoanBalancerModule],
+  imports: [HttpModule.register({}), LoadBalancerModule],
   controllers: [TransactionsController],
   providers: [TransactionsService, TransactionRepository],
 })

@@ -3,7 +3,7 @@ import { ConfigModule } from './config/config.module';
 import { AuthModule } from './auth/auth.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { HealthModule } from './health/health.module';
-import { LoanBalancerModule } from './loan-balancer/loan-balancer.module';
+import { LoadBalancerModule } from './load-balancer/load-balancer.module';
 import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
@@ -12,7 +12,7 @@ import { TransactionsModule } from './transactions/transactions.module';
     AuthModule,
     NotificationsModule,
     HealthModule,
-    LoanBalancerModule,
+    LoadBalancerModule,
     TransactionsModule,
   ],
 })

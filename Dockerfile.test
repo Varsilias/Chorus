@@ -1,0 +1,20 @@
+# NodeJS Version 20
+FROM node:20-buster-slim
+
+ENV NODE_ENV test
+ENV ENV test
+ENV PORT 3020
+
+# Copy Dir
+WORKDIR /usr/src/app
+
+# Work to Dir
+COPY package*.json ./
+
+# Install Node Package
+RUN npm install --legacy-peer-deps
+
+EXPOSE $PORT
+
+# Cmd script
+CMD ["npm", "run", "test"]

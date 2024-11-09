@@ -6,9 +6,12 @@ import {
 import { HealthService } from '../health/health.service';
 
 @Injectable()
-export class LoanBalancerService {
+export class LoadBalancerService {
+  getNextEndpoint() {
+    throw new Error('Method not implemented.');
+  }
   private currentIndex = 0;
-  private readonly logger = new Logger(LoanBalancerService.name);
+  private readonly logger = new Logger(LoadBalancerService.name);
 
   constructor(private readonly healthService: HealthService) {}
 

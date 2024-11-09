@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { LoanBalancerService } from '../loan-balancer/loan-balancer.service';
+import { LoadBalancerService } from '../load-balancer/load-balancer.service';
 import { HttpService } from '@nestjs/axios';
 import { TransactionDto } from './dto/process-transaction.dto';
 import { TransactionRepository } from './repository/transaction.repository';
@@ -18,7 +18,7 @@ export class TransactionsService {
   private lastTransactionId: number = 0;
 
   constructor(
-    private readonly loanBalancerService: LoanBalancerService,
+    private readonly loadBalancerService: LoadBalancerService,
     private readonly httpService: HttpService,
     private readonly transactionRepository: TransactionRepository,
   ) {}
@@ -44,7 +44,7 @@ export class TransactionsService {
     });
 
     try {
-      const nextSwitchUrl = this.loanBalancerService.getNextHealthySwitch();
+      const nextSwitchUrl = this.loadBalancerService.getNextHealthySwitch();
       this.logger.log(
         `Routing transaction ${transactionId} to ${nextSwitchUrl}`,
       );
