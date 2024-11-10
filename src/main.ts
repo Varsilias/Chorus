@@ -5,9 +5,9 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionFilter } from './commons/filters/global-exception.filter';
 import { ParamValidationPipe } from './commons/pipes/param-validation.pipe';
 import { TransformInterceptor } from './commons/interceptors/response-transform.interceptor';
-import * as fs from 'fs'
-import { rateLimit} from 'express-rate-limit';
-
+import * as fs from 'fs';
+import { rateLimit } from 'express-rate-limit';
+import { ormConfig } from './database/config/orm.config';
 
 async function bootstrap() {
   const config = new ConfigService();
@@ -18,13 +18,14 @@ async function bootstrap() {
     },
   });
 
+  console.log('ormConfig', ormConfig);
   const reflector = app.get(Reflector);
 
   app.use(
-  rateLimit({
-    windowMs: 60 * 1000, // 15 minutes
-    max: 10, // limit each IP to 100 requests per windowMs
-    message: 'Too many requests from this IP, please try again later.',
+    rateLimit({
+      windowMs: 60 * 1000, // 15 minutes
+      max: 10, // limit each IP to 100 requests per windowMs
+      message: 'Too many requests from this IP, please try again later.',
     }),
   );
 

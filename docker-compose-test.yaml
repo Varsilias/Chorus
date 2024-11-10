@@ -1,8 +1,9 @@
+name: chorus-core-test
 version: '3.9'
 
 services:
-  postgres:
-    container_name: chorus-postgres
+  postgres-test:
+    container_name: chorus-postgres-test
     image: postgres:16.2
     restart: unless-stopped
     env_file:
@@ -12,15 +13,18 @@ services:
       POSTGRES_DB: $DB_NAME
       POSTGRES_USER: $DB_USER
       POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
-
+      PGPORT: 5431
     networks:
       - chorus_core_test_network
-
     ports:
-      - '$DB_PORT:5432'
+      - '$DB_PORT:5431'
+    command:
+      - 'postgres'
+      - '-p'
+      - '5431'
 
   chorus-core-test:
-    container_name: chorus-core-test
+    container_name: app-core-test
     build:
       context: .
       dockerfile: Dockerfile.test
@@ -29,13 +33,13 @@ services:
     ports:
       - '$PORT:$PORT'
     depends_on:
-      - postgres
+      - postgres-test
     volumes:
       - .:/usr/src/app # any change to base folder should be reflected
       - /usr/src/app/node_modules
     networks:
       - chorus_core_test_network
-    command: yarn start:dev # overrides CMD from dockerfile
+    command: yarn test:all # overrides CMD from dockerfile
 
 networks:
   chorus_core_test_network:

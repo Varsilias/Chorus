@@ -1,3 +1,4 @@
+name: chorus-core
 version: '3.9'
 
 services:
@@ -36,7 +37,7 @@ services:
       - .env
 
   chorus:
-    container_name: chorus-core
+    container_name: app-core
     build:
       context: .
       dockerfile: Dockerfile
