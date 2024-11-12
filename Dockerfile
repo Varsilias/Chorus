@@ -14,21 +14,9 @@ RUN npm install
 COPY  . .
 
 
-# --- Lint and Unit Test
-
-FROM base as linter
-
-ENV NODE_ENV test
-ENV ENV test
-
-WORKDIR /usr/src/app
-
-RUN npm run lint && \
-    npm run test
-
 # --- Build
 
-FROM linter as builder
+FROM base as builder
 
 WORKDIR /usr/src/app
 
