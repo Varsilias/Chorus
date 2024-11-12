@@ -1,6 +1,7 @@
-import { Column } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { BaseEntity } from '../../../commons/entities/base.entity';
 
+@Entity({ name: 'transactions' })
 export class TransactionEntity extends BaseEntity<TransactionEntity> {
   @Column({ type: 'jsonb' })
   metadata: any;
